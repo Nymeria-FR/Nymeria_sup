@@ -8,7 +8,6 @@ class Config:
         config_file = self.get_path(file_name)
         if not os.path.isfile(config_file):
             print(f"config {file_name} doesn't exist, copying template!")
-            shutil.copyfile(self.get_path(template_name), config_file)
         return config_file
 
 class TomlConfig(Config):
