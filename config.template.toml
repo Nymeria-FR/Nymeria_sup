@@ -1,7 +1,8 @@
-[bot]
-bot = true
-id = "XXXXXXXXXXXXXXXXXX"
-token = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
-guild = "XXXXXXXXXXXXXXXXXX"
-sup_cat = "XXXXXXXXXXXXXXXXXX"
-ready_chan = "XXXXXXXXXXXXXXXXXX"
+[bots]
+
+    [bots.rp]
+        bot = true
+        token = "XXXXXXXXXXXXXXXXXXXXXXXXX"
+        guild = "XXXXXXXXXXXXXXXXXXXXXX"
+        sup_cat = "XXXXXXXXXXXXXXXXXXXXXX"
+        ready_chan = "XXXXXXXXXXXXXXXXXXXXXX"

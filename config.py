@@ -1,4 +1,5 @@
 import os, toml
+import shutil
 
 class Config:
     def get_path(self, name):
@@ -8,6 +9,7 @@ class Config:
         config_file = self.get_path(file_name)
         if not os.path.isfile(config_file):
             print(f"config {file_name} doesn't exist, copying template!")
+            shutil.copyfile(self.get_path(template_name), config_file)
         return config_file
 
 class TomlConfig(Config):
@@ -17,10 +19,4 @@ class TomlConfig(Config):
 
     def load_config(self, config_file):
         config = toml.load(config_file)
-        bot = config["bot"]
-        self.bot = bot["bot"]
-        self.id = bot["id"]
-        self.token = bot["token"]
-        self.guild = bot["guild"]
-        self.sup_cat = bot["sup_cat"]
-        self.ready_chan = bot["ready_chan"]
+        self.bots = config["bots"]
