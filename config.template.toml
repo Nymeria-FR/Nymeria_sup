@@ -1,3 +1,6 @@
+[extern]
+pid = "xxx.txt"
+
 [bots]
 
     [bots.rp]

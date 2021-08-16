@@ -20,3 +20,4 @@ class TomlConfig(Config):
     def load_config(self, config_file):
         config = toml.load(config_file)
         self.bots = config["bots"]
+        self.extern = config["extern"]

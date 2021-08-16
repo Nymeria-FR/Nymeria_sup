@@ -2,7 +2,7 @@ import datetime
 import discord
 import time
 import sys
-
+import os
 
 from pytz import timezone
 from config import TomlConfig
@@ -10,6 +10,9 @@ from config import TomlConfig
 client = discord.Client()
 config = TomlConfig("config.toml", "config.template.toml")
 bot = config.bots[sys.argv[1]]
+
+with open(config.extern["pid"], 'a') as pid:
+    pid.write(sys.argv[1] + " " + str(os.getpid()) + "\n")
 
 global chrono
 chrono = time.time()
@@ -74,5 +77,6 @@ async def on_message(message):
                 id = take_id(message.channel.name)
                 user = await client.fetch_user(id)
                 await user.send(message.content)
+
 
 client.run(bot["token"], bot=bot["bot"])
