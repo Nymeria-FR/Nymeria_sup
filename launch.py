@@ -8,10 +8,18 @@ config = TomlConfig("config.toml", "config.template.toml")
 values = sys.argv[1:]
 
 if values[0] == "start":
-    for key in config.bots.keys():
-        if len(values[1:]) == 0 or key in values:
-            print("Lancemnet : " + key)
-            os.system("python3 nymeria_sup.py " + key + "&")
+    with open(config.extern["pid"], "r") as folder:
+        pids = folder.read()
+        pids = pids.split("\n")
+        names = [pid.split(" ")[0] for pid in pids]
+        if len(values[1:]) == 0:
+            for name in config.bots.keys():
+                if not name in names:
+                    values.append(name)
+        for key in config.bots.keys():
+            if key in values:
+                print("Lancemnet : " + key)
+                os.system("python3 nymeria_sup.py " + key + "&")
 
 elif values[0] == "stop":
     with open(config.extern["pid"], "r") as folder:
