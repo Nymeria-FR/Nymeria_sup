@@ -50,8 +50,6 @@ async def on_message(message):
             id = member_in_cat(message.author)
             if(type(id) == int):
                 channel = guild.get_channel(id)
-                await channel.send(message.content)
-                chrono = time.time()
             else:
                 if time.time() - chrono < 5:
                     await message.author.send("Le service est surchargé veuillez ressayer plus tard")
@@ -62,16 +60,25 @@ async def on_message(message):
                     new = discord.Embed(title="Un member demande de l'aide",
                                         description=f"Mention: {message.author.mention}\nUtilisateur: {message.author.name}\n ID: {message.author}")
                     await channel.send(embed=new)
-                    await channel.send(message.content)
                     chrono = time.time()
+            message = discord.Embed(title="Un nouveau message :",
+                                    description=f"**Son message :**\n{message.content}")
+            await channel.send(embed=message)
         elif(message.channel.category.id == cat.id and
              message.channel.id != bot["ready_chan"]):
             if message.content == "close":
                 await message.channel.delete()
+
             else:
+                await message.delete()
                 id = int(message.channel.topic)
                 user = await client.fetch_user(id)
-                await user.send(message.content)
+                admin_message = discord.Embed(title=f"{message.author.name}",
+                                              description=f"{message.content}")
+                await message.channel.send(embed=admin_message)
+                user_message = discord.Embed(title="Réponse du staff",
+                                             description=f"{message.content}")
+                await user.send(embed=user_message)
 
 
 client.run(bot["token"], bot=bot["bot"])
