@@ -6,6 +6,7 @@ from config import TomlConfig
 
 config = TomlConfig("config.toml", "config.template.toml")
 values = sys.argv[1:]
+print(os.path.dirname(os.path.realpath(__file__)))
 
 if values[0] == "start":
     with open(config.extern["pid"], "r") as folder:
@@ -19,7 +20,8 @@ if values[0] == "start":
         for key in config.bots.keys():
             if key in values:
                 print("Lancemnet : " + key)
-                os.system("python3 nymeria_sup.py " + key + "&")
+                os.system("python3 " + os.path.dirname(os.path.realpath(__file__))
+                          + "/nymeria_sup.py " + key + "&")
 
 elif values[0] == "stop":
     with open(config.extern["pid"], "r") as folder:
