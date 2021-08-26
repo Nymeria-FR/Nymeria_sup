@@ -1,5 +1,6 @@
 [extern]
 pid = "xxx.txt"
+close_emoji = "xxx"
 
 [bots]
 
