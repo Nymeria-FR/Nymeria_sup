@@ -20,7 +20,7 @@ if values[0] == "start":
         for key in config.bots.keys():
             if key in values:
                 print("Lancemnet : " + key)
-                os.system("python3 " + os.path.dirname(os.path.realpath(__file__))
+                os.system("python3.8 " + os.path.dirname(os.path.realpath(__file__))
                           + "/nymeria_sup.py " + key + "&")
 
 elif values[0] == "stop":
